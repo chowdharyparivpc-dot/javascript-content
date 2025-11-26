@@ -1,0 +1,30 @@
+name: Show Output
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  show-output:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Print runner and node info
+        run: |
+          echo "Runner: $(uname -a)"
+          node --version || true
+
+      - name: List repository files
+        run: ls -la
+
+      - name: Show `index.html` (first 200 lines)
+        run: |
+          echo "=== index.html ==="
+          sed -n '1,200p' index.html || true
+
+      - name: Show `README.md` (first 200 lines)
+        run: |
+          echo "=== README.md ==="
+          sed -n '1,200p' README.md || true
