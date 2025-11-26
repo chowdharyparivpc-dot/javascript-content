@@ -16,15 +16,22 @@ jobs:
           echo "Runner: $(uname -a)"
           node --version || true
 
-      - name: List repository files
-        run: ls -la
-
-      - name: Show `index.html` (first 200 lines)
+      - name: List repository files (recursive)
         run: |
-          echo "=== index.html ==="
-          sed -n '1,200p' index.html || true
+          echo "=== ls -laR ==="
+          ls -laR
 
-      - name: Show `README.md` (first 200 lines)
+      - name: Show all HTML files (first 200 lines each)
         run: |
-          echo "=== README.md ==="
-          sed -n '1,200p' README.md || true
+          echo "=== HTML files preview (first 200 lines each) ==="
+          # Find all HTML files and print a header + first 200 lines for each
+          find . -type f -name '*.html' -print | while read -r file; do
+            echo "--- $file ---"
+            sed -n '1,200p' "$file" || true
+            echo "";
+          done
+
+      - name: Show other key files (first 200 lines)
+        run: |
+          echo "=== README.md (if present) ==="
+          [ -f README.md ] && sed -n '1,200p' README.md || echo "(no README.md)"
