@@ -3,16 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javasrcipt</title>
-    <scrpit>
-        document.write("Hello, World!");
-        console.log("Hello, World!");
-    </scrpit>
+    <title>Javascript</title>
+    <style>
+    :root{
+        --bg1:#f6d365;
+        --bg2:#fda085;
+        --accent:#6c63ff;
+        --accent-2:#ff6b6b;
+        --card:#ffffffdd;
+        --muted:#6b7280;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+        margin:0;
+        min-height:100vh;
+        display:flex;
+        flex-wrap:wrap;
+        align-items:center;
+        justify-content:center;
+        gap:1rem;
+        padding:2.5rem;
+        background:linear-gradient(135deg,var(--bg1),var(--bg2));
+        font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Put count on its own row and center buttons on the next row */
+    #count{
+        order:-1;
+        width:100%;
+        max-width:420px;
+        margin:0 auto;
+        background:var(--card);
+        padding:1.2rem 1.4rem;
+        border-radius:14px;
+        box-shadow:0 12px 30px rgba(16,24,40,.12);
+        text-align:center;
+        font-size:3.5rem;
+        font-weight:800;
+        color:var(--accent);
+        letter-spacing:-0.02em;
+        text-shadow:0 6px 24px rgba(108,99,255,.12);
+    }
+
+    /* Buttons row styling (buttons are direct children of body) */
+    body > button{
+        min-width:150px;
+        padding:.65rem .9rem;
+        border-radius:10px;
+        border:0;
+        cursor:pointer;
+        font-weight:700;
+        box-shadow:0 8px 24px rgba(16,24,40,.08);
+        transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+    }
+
+    /* Individual button styles (keeps order matching your HTML) */
+    body > button:nth-of-type(1){
+        background:linear-gradient(90deg,var(--accent),#8b80ff);
+        color:#fff;
+    }
+    body > button:nth-of-type(2){
+        background:linear-gradient(90deg,#ff8a8a,var(--accent-2));
+        color:#fff;
+    }
+    body > button:nth-of-type(3){
+        background:transparent;
+        color:var(--muted);
+        border:1px solid rgba(0,0,0,.06);
+    }
+
+    /* Row layout for buttons */
+    @supports (gap: 1rem) {
+        /* keep buttons together and centered */
+        body{
+            gap:.9rem;
+        }
+        body > button{ margin:0; }
+        /* create a centered row by letting the buttons sit next to each other */
+        body{
+            justify-content:center;
+        }
+    }
+
+    /* Interaction states */
+    body > button:hover{ transform:translateY(-4px); box-shadow:0 18px 36px rgba(16,24,40,.16); }
+    body > button:active{ transform:translateY(-2px); }
+    body > button:focus{ outline:3px solid rgba(108,99,255,.14); outline-offset:3px; }
+
+    /* Make layout friendly on small screens */
+    @media (max-width:440px){
+        #count{font-size:2.6rem; padding:.9rem 1rem; max-width:320px}
+        body > button{min-width:110px; padding:.5rem .7rem; font-size:.95rem}
+    }
+    </style>
+    <script>
+        let count = 0;
+        function decrement() {
+                count = count-5;
+                document.getElementById("count").textContent = count
+        }
+        function increment() {
+                count = count+5;
+            document.getElementById("count").textContent = count
+        }
+        function Reset() {
+                count = 0;
+            document.getElementById("count").textContent = count
+        }
+    </script>
 </head>
 <body>
-    <scrpit>
-
-    </scrpit>
-    
+    <p id="count">0</p>
+    <button onclick="increment()">Increment by 5</button>
+    <button onclick="decrement()">Decrement by 5</button>
+    <button onclick="Reset()">Reset</button>
 </body>
 </html>
